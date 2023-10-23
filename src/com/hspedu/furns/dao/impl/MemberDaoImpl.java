@@ -18,4 +18,11 @@ public class MemberDaoImpl extends BasicDAO<Member> implements MemberDao {
         String sql = "INSERT INTO `member`(`username`,`password`,`email`) VALUES(?,?,?);";
         return update(sql, member.getUsername(), member.getPassword(), member.getEmail());
     }
+
+    //通过名字和密码得到member
+    @Override
+    public Member queryMemberByUsernameAndPassword(String username, String password) {
+        String sql = "SELECT `id`,`username`,`password`,`email` FROM `member` WHERE `username` = ? AND `password` = ?";
+        return querySingle(sql, Member.class, username, password);
+    }
 }

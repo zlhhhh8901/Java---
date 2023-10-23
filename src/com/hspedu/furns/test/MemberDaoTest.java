@@ -24,4 +24,12 @@ public class MemberDaoTest {
             System.out.println("插入失败");
         }
     }
+    @Test
+    public void queryMemberByUsernameAndPasswordTest(){
+        if(memberDao.queryMemberByUsernameAndPassword("lll", "lll") == null){
+            System.out.println("没有找到");
+        }else {
+            System.out.println("找到了！");
+        }
+    }
 }
