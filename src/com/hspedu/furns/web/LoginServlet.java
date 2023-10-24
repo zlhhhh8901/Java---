@@ -26,10 +26,12 @@ public class LoginServlet extends HttpServlet {
         //MemberService memberService = new MemberServiceImpl();注意这个定义为私有属性
         if(memberService.login(member) == null){
             System.out.println("该用户不存在，登录失败");
-            req.getRequestDispatcher("/views/member/login_ok.html").forward(req, resp);
+            req.setAttribute("msg", "用户名或密码错误");
+            req.setAttribute("username", username);
+            req.getRequestDispatcher("/views/member/login.jsp").forward(req, resp);
         }else {
             System.out.println("登录成功");
-            req.getRequestDispatcher("/views/member/register_ok.html").forward(req, resp);
+            req.getRequestDispatcher("/views/member/login_ok.html").forward(req, resp);
         }
     }
 }

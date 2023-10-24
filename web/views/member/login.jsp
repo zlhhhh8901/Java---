@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<%@page contentType="text/html; charset=UTF-8" language="java"%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <title>韩顺平教育-家居网购</title>
-    <base href="http://localhost:8080/Javaweb_project/">
+    <%--<base href="http://localhost:8080/Javaweb_project/">--%>
+    <base href="<%=request.getContextPath() + "/"%>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css"/>
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css"/>
@@ -103,8 +104,12 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
+                                    <%--提示错误信息--%>
+                                    <span style="font-size: 18pt;font-weight: bold;float: right;color: gainsboro">
+                                    ${requestScope.msg}
+                                    </span>
                                     <form action="loginServlet" method="post">
-                                        <input type="text" name="username" placeholder="Username"/>
+                                        <input type="text" name="username" value="${requestScope.username}" placeholder="Username"/>
                                         <input type="password" name="password" placeholder="Password"/>
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
@@ -182,7 +187,7 @@
                                         <li class="li"><a class="single-link" href="my-account.html">我的账号</a>
                                         </li>
                                         <li class="li"><a class="single-link" href="cart.html">我的购物车</a></li>
-                                        <li class="li"><a class="single-link" href="login.html">登录</a></li>
+                                        <li class="li"><a class="single-link" href="login.jsp">登录</a></li>
                                         <li class="li"><a class="single-link" href="wishlist.html">感兴趣的</a></li>
                                         <li class="li"><a class="single-link" href="checkout.html">结账</a></li>
                                     </ul>

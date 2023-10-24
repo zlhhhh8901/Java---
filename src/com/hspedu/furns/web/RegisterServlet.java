@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
             }
         } else {
             System.out.println("用户名存在" + username + "不可以注册");
-            req.getRequestDispatcher("/view/member/login.html").forward(req, resp);
+            req.getRequestDispatcher("/view/member/login.jsp").forward(req, resp);
         }
     }
 
