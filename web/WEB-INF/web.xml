@@ -28,4 +28,23 @@
         <servlet-name>MemberServlet</servlet-name>
         <url-pattern>/memberServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FurnServlet</servlet-name>
+        <servlet-class>com.hspedu.furns.web.FurnServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FurnServlet</servlet-name>
+        <!--这个servlet功能是管理，所以在前面加一个/manage，方便后续过滤操作-->
+        <url-pattern>/manage/furnServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>com.hspedu.furns.web.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/adminServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
