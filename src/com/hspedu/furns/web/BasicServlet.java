@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 abstract public class BasicServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");//在doPost方法解决中文乱码！
         String action = req.getParameter("action");
         try {
             Method method = this.getClass().

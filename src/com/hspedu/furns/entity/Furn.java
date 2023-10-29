@@ -11,7 +11,8 @@ public class Furn {
     private Integer stock;
     //注意表中此处列名为 img_path
     //开发中遇到这种属性名与列名不一致的情况如何处理？后面会讲
-    private String imgPath;
+    private String imgPath = "assets/images/product-image/6.jpg";
+    //为解决实现”添加家具“功能时遇到的问题而设定的初始值
 
     public Integer getId() {
         return id;
@@ -78,7 +79,9 @@ public class Furn {
         this.price = price;
         this.sales = sales;
         this.stock = stock;
-        this.imgPath = imgPath;
+        if(!(imgPath == null || imgPath.equals(""))){
+            this.imgPath = imgPath;
+        }
     }
 
     public Furn(){}

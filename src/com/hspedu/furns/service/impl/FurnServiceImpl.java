@@ -13,4 +13,9 @@ public class FurnServiceImpl implements FurnService {
     public List<Furn> queryFurns() {
         return furnDao.queryFurns();
     }
+
+    @Override
+    public boolean add(Furn furn) {
+        return furnDao.add(furn) == -1 ? false : true;
+    }
 }
