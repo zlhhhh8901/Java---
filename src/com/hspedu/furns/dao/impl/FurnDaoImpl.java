@@ -24,4 +24,10 @@ public class FurnDaoImpl extends BasicDAO<Furn> implements FurnDao {
         String sql = "INSERT INTO furn (`name`,maker,price,sales,stock,img_path) VALUES (?,?,?,?,?,?);";
         return update(sql,furn.getName(),furn.getMaker(),furn.getPrice(),furn.getSales(),furn.getStock(),furn.getImgPath());
     }
+
+    @Override
+    public int delete(int id) {
+        String sql = "DELETE FROM furn WHERE id=?;";
+        return update(sql,id);
+    }
 }

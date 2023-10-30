@@ -11,6 +11,25 @@
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css"/>
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css"/>
     <link rel="stylesheet" href="assets/css/style.min.css">
+    <%--引入jquery--%>
+    <script type="text/javascript" src="script/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(function () { //页面加载完毕后执行function(){}
+
+            //绑定点击事件
+            $("a.deleteCss").click(function () {
+                //获取到要删除的家居的名字
+                var furnName = $(this).parent().parent().find("td:eq(1)").text();
+
+                //老韩解读
+                //1. confirm方法会弹出一个确认窗口
+                //2. 点击确定，返回true
+                //3. 点击取消，返回false
+                return confirm("你确定要删除【" + furnName + "】?");
+            })
+
+        })
+    </script>
 </head>
 
 <body>
@@ -113,7 +132,7 @@
                                 </td>
                                 <td class="product-remove">
                                     <a href="#"><i class="icon-pencil"></i></a>
-                                    <a href="#"><i class="icon-close"></i></a>
+                                    <a class="deleteCSS" href="manage/furnServlet?action=deleteById&id=${furn.id}"><i class="icon-close"></i></a>
                                 </td>
                             </tr>
                             </c:forEach>

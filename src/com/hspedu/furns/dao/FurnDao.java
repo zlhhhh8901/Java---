@@ -10,4 +10,8 @@ public interface FurnDao {
 
     //添加家具
     public int add(Furn furn);
+
+    //删除家具
+    public int delete(int id);
+
 }

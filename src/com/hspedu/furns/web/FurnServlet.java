@@ -25,6 +25,7 @@ public class FurnServlet extends BasicServlet {
      */
     private FurnService furnService = new FurnServiceImpl();
 
+    //显示所有家居
     protected void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //想测试能否跑通，输入的网址应该是：
         //http://localhost:8080/Javaweb_project/manage/furnServlet?action=list
@@ -98,7 +99,14 @@ public class FurnServlet extends BasicServlet {
         //浏览器页面网址停留在第一次发出servlet请求时，因此刷新页面相同的请求会再次发出，导致数据重复添加
         //解决方法：用重定向
         resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
+    }
 
-
+    //删除家具
+    protected void deleteById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //为防止接收到的id格式不是一个数字字符串
+        //在DataUtils写了一个方法
+        int id = DataUtils.parseInt(req.getParameter("id"), 0);
+        furnService.deleteById(id);
+        resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
     }
 }
