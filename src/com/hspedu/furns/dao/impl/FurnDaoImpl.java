@@ -22,12 +22,29 @@ public class FurnDaoImpl extends BasicDAO<Furn> implements FurnDao {
     public int add(Furn furn) {
         //添加家具，返回-1则添加失败
         String sql = "INSERT INTO furn (`name`,maker,price,sales,stock,img_path) VALUES (?,?,?,?,?,?);";
-        return update(sql,furn.getName(),furn.getMaker(),furn.getPrice(),furn.getSales(),furn.getStock(),furn.getImgPath());
+        return update(sql, furn.getName(), furn.getMaker(), furn.getPrice(), furn.getSales(), furn.getStock(), furn.getImgPath());
     }
 
     @Override
     public int delete(int id) {
         String sql = "DELETE FROM furn WHERE id=?;";
-        return update(sql,id);
+        return update(sql, id);
+    }
+
+    @Override
+    //查询获取
+    public Furn getFurn(int id) {
+        String sql = "select `id`,`name`,`maker`,`price`,`sales`,`stock`,`img_path` imgPath from furn " +
+                "where `id`=?";
+        return querySingle(sql, Furn.class, id);
+    }
+
+    @Override
+    public int update(Furn furn) {
+        //修改家具信息
+        String sql = "UPDATE furn SET `name`=?,maker=?,price=?,sales=?,stock=?,img_path=? " +
+                "WHERE `id`=?;";
+        return update(sql, furn.getName(), furn.getMaker(), furn.getPrice(),
+                furn.getSales(), furn.getStock(), furn.getImgPath(), furn.getId());
     }
 }

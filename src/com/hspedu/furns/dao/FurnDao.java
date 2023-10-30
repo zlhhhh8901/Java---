@@ -14,4 +14,9 @@ public interface FurnDao {
     //删除家具
     public int delete(int id);
 
+    //获取家具
+    public Furn getFurn(int id);
+
+    //更改家具
+    public int update(Furn furn);
 }

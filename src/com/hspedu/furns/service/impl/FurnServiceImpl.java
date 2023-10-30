@@ -23,4 +23,16 @@ public class FurnServiceImpl implements FurnService {
     public boolean deleteById(int id) {
         return furnDao.delete(id) == -1 ? false : true;
     }
+
+    @Override
+    public Furn queryById(int id) {
+        return furnDao.getFurn(id);
+    }
+
+    @Override
+    public boolean update(Furn furn) {
+        return furnDao.update(furn) == -1 ? false : true;
+    }
+
+
 }

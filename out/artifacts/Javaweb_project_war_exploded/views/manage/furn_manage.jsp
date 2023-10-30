@@ -131,7 +131,7 @@
                                     ${furn.stock}
                                 </td>
                                 <td class="product-remove">
-                                    <a href="#"><i class="icon-pencil"></i></a>
+                                    <a href="manage/furnServlet?action=queryById&id=${furn.id}"><i class="icon-pencil"></i></a>
                                     <a class="deleteCSS" href="manage/furnServlet?action=deleteById&id=${furn.id}"><i class="icon-close"></i></a>
                                 </td>
                             </tr>

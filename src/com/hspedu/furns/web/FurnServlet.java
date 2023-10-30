@@ -109,4 +109,19 @@ public class FurnServlet extends BasicServlet {
         furnService.deleteById(id);
         resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
     }
+
+    //查询获取家具
+    protected void queryById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = DataUtils.parseInt(req.getParameter("id"), 0);
+        Furn furn = furnService.queryById(id);
+        req.setAttribute("furn", furn);
+        req.getRequestDispatcher("/views/manage/furn_update.jsp").forward(req, resp);
+    }
+
+    //修改家具信息
+    protected void updateFurn(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Furn furn = DataUtils.copyParamToBean(req.getParameterMap(), new Furn());
+        furnService.update(furn);
+        resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
+    }
 }

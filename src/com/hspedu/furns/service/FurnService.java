@@ -10,4 +10,8 @@ public interface FurnService {
     public boolean add(Furn furn);
     //删除家具
     public boolean deleteById(int id);
+    //获取家具
+    public Furn queryById(int id);
+    //修改家具
+    public boolean update(Furn furn);
 }
