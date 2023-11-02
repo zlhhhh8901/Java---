@@ -3,6 +3,7 @@ package com.hspedu.furns.service.impl;
 import com.hspedu.furns.dao.FurnDao;
 import com.hspedu.furns.dao.impl.FurnDaoImpl;
 import com.hspedu.furns.entity.Furn;
+import com.hspedu.furns.entity.Page;
 import com.hspedu.furns.service.FurnService;
 
 import java.util.List;
@@ -32,6 +33,30 @@ public class FurnServiceImpl implements FurnService {
     @Override
     public boolean update(Furn furn) {
         return furnDao.update(furn) == -1 ? false : true;
+    }
+
+    @Override
+    public Page<Furn> page(int pageNo, int pageSize) {
+        Page<Furn> page = new Page<>();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        int totalRow = furnDao.getTotalRow();
+        page.setTotalRow(totalRow);
+        //设计一个简单的算法获取pageTotalCount
+        int pageTotalCount = totalRow / pageSize;
+        if(totalRow % pageSize > 0){
+            pageTotalCount += 1;
+        }
+        page.setPageTotalCount(pageTotalCount);
+
+        //不明白的看mysql分页查询
+        //这里藏了个坑后面演示
+        int begin = (pageNo - 1) * pageSize;
+        List<Furn> pageItems = furnDao.getPageItems(begin, pageSize);
+        page.setItems(pageItems);
+
+        //还差一个url 后面实现
+        return page;
     }
 
 

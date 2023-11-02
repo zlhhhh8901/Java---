@@ -19,4 +19,8 @@ public interface FurnDao {
 
     //更改家具
     public int update(Furn furn);
+
+    //为Page类中totalRow和items两个属性填充数据
+    public int getTotalRow();
+    public List<Furn> getPageItems(int begin, int pageSize);
 }

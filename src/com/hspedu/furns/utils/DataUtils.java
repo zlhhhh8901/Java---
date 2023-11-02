@@ -20,7 +20,7 @@ public class DataUtils {
         try {
             return Integer.parseInt(val);
         } catch (NumberFormatException e) {
-            System.out.println("id格式不对");
+            System.out.println(val + "格式不对");
         }
         return defaultVal;
     }

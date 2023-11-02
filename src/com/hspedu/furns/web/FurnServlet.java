@@ -1,6 +1,7 @@
 package com.hspedu.furns.web;
 
 import com.hspedu.furns.entity.Furn;
+import com.hspedu.furns.entity.Page;
 import com.hspedu.furns.service.FurnService;
 import com.hspedu.furns.service.impl.FurnServiceImpl;
 import com.hspedu.furns.utils.DataUtils;
@@ -98,8 +99,10 @@ public class FurnServlet extends BasicServlet {
         //注意上面这里用请求转发有个重大问题————
         //浏览器页面网址停留在第一次发出servlet请求时，因此刷新页面相同的请求会再次发出，导致数据重复添加
         //解决方法：用重定向
-        resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
+        //resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
+        resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=page&pageNo="+ req.getParameter("pageNo"));
     }
+
 
     //删除家具
     protected void deleteById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -107,7 +110,8 @@ public class FurnServlet extends BasicServlet {
         //在DataUtils写了一个方法
         int id = DataUtils.parseInt(req.getParameter("id"), 0);
         furnService.deleteById(id);
-        resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
+        //resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
+        resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=page&pageNo="+ req.getParameter("pageNo"));
     }
 
     //查询获取家具
@@ -115,6 +119,8 @@ public class FurnServlet extends BasicServlet {
         int id = DataUtils.parseInt(req.getParameter("id"), 0);
         Furn furn = furnService.queryById(id);
         req.setAttribute("furn", furn);
+        //将pageNo保存到request域
+        req.setAttribute("pageNo", req.getParameter("pageNo"));
         req.getRequestDispatcher("/views/manage/furn_update.jsp").forward(req, resp);
     }
 
@@ -122,6 +128,17 @@ public class FurnServlet extends BasicServlet {
     protected void updateFurn(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Furn furn = DataUtils.copyParamToBean(req.getParameterMap(), new Furn());
         furnService.update(furn);
-        resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
+        //resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=list");
+        //考虑分页并带上pageNo
+        resp.sendRedirect(req.getContextPath() + "/manage/furnServlet?action=page&pageNo="+ req.getParameter("pageNo"));
+    }
+
+    //获取分页数据
+    protected void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int pageSize = DataUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        int pageNo = DataUtils.parseInt(req.getParameter("pageNo"), 1);
+        Page<Furn> page = furnService.page(pageNo, pageSize);
+        req.setAttribute("page", page);
+        req.getRequestDispatcher("/views/manage/furn_manage.jsp").forward(req, resp);
     }
 }

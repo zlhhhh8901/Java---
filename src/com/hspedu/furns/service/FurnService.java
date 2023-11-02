@@ -1,6 +1,7 @@
 package com.hspedu.furns.service;
 
 import com.hspedu.furns.entity.Furn;
+import com.hspedu.furns.entity.Page;
 
 import java.util.List;
 
@@ -14,4 +15,7 @@ public interface FurnService {
     public Furn queryById(int id);
     //修改家具
     public boolean update(Furn furn);
+
+    //根据页数pageNo和pageSize获取家具信息
+    public Page<Furn> page(int pageNo, int pageSize);
 }

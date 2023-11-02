@@ -47,4 +47,21 @@ public class FurnDaoImpl extends BasicDAO<Furn> implements FurnDao {
         return update(sql, furn.getName(), furn.getMaker(), furn.getPrice(),
                 furn.getSales(), furn.getStock(), furn.getImgPath(), furn.getId());
     }
+
+    @Override
+    public int getTotalRow() {
+        String sql = "SELECT COUNT(*) from furn";
+        //return (Integer)queryScalar(sql); 这里获取到的数据类型是Long，因此转为Integer会报错
+        //而把方法返回值改为Long又不划算，因为只取一个数而已
+        //所以这里先转为Number再转为int
+        return ((Number)queryScalar(sql)).intValue();
+    }
+
+    @Override
+    public List<Furn> getPageItems(int begin, int pageSize) {
+        String sql = "select `id`,`name`,`maker`,`price`,`sales`,`stock`,`img_path` imgPath from furn " +
+                "LIMIT ?,?";
+        return queryMulti(sql, Furn.class, begin, pageSize);
+    }
+
 }

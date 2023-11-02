@@ -73,8 +73,11 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <form action="manage/furnServlet" method="post">
+                    <%--增加一个隐藏域给add--%>
                     <input type="hidden" name="action" value="add">
-                    <div class="table-content table-responsive cart-table-content">
+                    <%--增加一个隐藏域给pageNo--%>
+                    <input type="hidden" name="pageNo" value="${param.pageNo}">
+                        <div class="table-content table-responsive cart-table-content">
                         <table>
                             <thead>
                             <tr>

@@ -17,7 +17,8 @@ abstract public class BasicServlet extends HttpServlet {
                     getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
             method.invoke(this, req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            //将发生的异常继续throw
+            throw new RuntimeException(e);
         }
     }
 
